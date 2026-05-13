@@ -1,105 +1,68 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deteksi Kabel Charger</title>
-
-    <!-- ONNX Runtime -->
-    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-
-    <style>
-
-        body{
-            background:#121212;
-            color:white;
-            font-family:Arial;
-            text-align:center;
-            padding:20px;
+            padding: 20px;
         }
 
-        .container{
-            position:relative;
-            width:640px;
-            height:480px;
-            margin:auto;
-            border:2px solid #444;
-            border-radius:10px;
-            overflow:hidden;
+        .container {
+            position: relative;
+            width: 640px;
+            height: 480px;
+            border: 2px solid #555;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
-        video{
-            position:absolute;
-            width:640px;
-            height:480px;
-            top:0;
-            left:0;
-            object-fit:cover;
+        video,
+        canvas#overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 640px;
+            height: 480px;
         }
 
-        canvas{
-            position:absolute;
-            width:640px;
-            height:480px;
-            top:0;
-            left:0;
+        canvas#overlay {
+            z-index: 10;
+            pointer-events: none;
         }
 
-        #processor{
-            display:none;
+        #status {
+            margin: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #1e1e1e;
+            border: 1px solid #444;
+            width: 600px;
+            text-align: center;
         }
 
-        button{
-            margin-top:20px;
-            padding:12px 20px;
-            font-size:18px;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-            background:#ff9800;
-            color:white;
-            font-weight:bold;
+        .btn-start {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: #FF3B30;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
         }
-
-        #status{
-            margin-top:15px;
-            padding:10px;
-            background:#1e1e1e;
-            border-radius:8px;
-        }
-
     </style>
 </head>
 <body>
 
-    <h1>AI Deteksi Kabel Charger</h1>
+    <h1>🛡️ Proyek AI: Deteksi Otomatis</h1>
+    <p>Dibuat oleh: Nama Kalian</p>
+
+    <button id="btn-init" class="btn-start">AKTIFKAN KAMERA</button>
+    <div id="status">STATUS: MATI</div>
 
     <div class="container">
-
-        <video
-            id="webcam"
-            autoplay
-            playsinline
-        ></video>
-
-        <canvas id="overlay"></canvas>
-
-        <canvas
-            id="processor"
-            width="640"
-            height="480"
-        ></canvas>
-
+        <video id="webcam" playsinline muted></video>
+        <canvas id="overlay" width="640" height="480"></canvas>
     </div>
 
-    <button id="btn-init">
-        AKTIFKAN KAMERA
-    </button>
+    <canvas id="processor" width="640" height="640" style="display:none;"></canvas>
 
-    <div id="status">
-        Menunggu...
-    </div>
-
+    <!-- Hubungkan ke app.js -->
     <script src="app.js"></script>
 
 </body>
